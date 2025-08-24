@@ -1,0 +1,22 @@
+# Virtual environment (Windows/macOS/Linux)
+venv/
+.venv/
+env/
+.env
+
+# Python cache files
+__pycache__/
+*.py[cod]
+*.sqlite3
+
+# IDE/editor settings
+.vscode/
+*.code-workspace
+
+# Temporary files
+*.log
+*.tmp
+
+# System files (Windows/macOS)
+Thumbs.db
+.DS_Store
