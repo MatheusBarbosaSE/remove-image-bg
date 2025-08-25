@@ -135,3 +135,6 @@ REST_FRAMEWORK = {
 CORS_ALLOWED_ORIGINS = config(
     "CORS_ALLOWED_ORIGINS", default="http://127.0.0.1:5500,http://localhost:5500"
 ).split(",")
+
+# Max upload size in bytes (default: 5 MB)
+MAX_UPLOAD_SIZE = int(config("MAX_UPLOAD_SIZE", default=str(5 * 1024 * 1024)))
