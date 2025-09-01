@@ -4,7 +4,10 @@ const removeBtn = document.getElementById("removeBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const dropArea = document.getElementById("dropArea");
 
+const API_URL = "http://127.0.0.1:8000/api/remove-background/";
+
 let uploadedFile = null;
+let processedImageURL = null;
 
 // Events
 // File input preview
@@ -22,6 +25,42 @@ if (imageInput && previewArea && removeBtn && downloadBtn) {
       previewArea.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
     };
     reader.readAsDataURL(file);
+  });
+
+  // Fetch API → process image
+  removeBtn.addEventListener("click", async () => {
+    if (!uploadedFile) return;
+
+    removeBtn.disabled = true;
+    const originalText = removeBtn.textContent;
+    removeBtn.textContent = "Processing...";
+
+    const formData = new FormData();
+    formData.append("image", uploadedFile);
+
+    try {
+      const res = await fetch(API_URL, { method: "POST", body: formData });
+      if (!res.ok) {
+        let message = `Failed to process image (${res.status})`;
+        try {
+          const data = await res.json();
+          if (data?.error) message = data.error;
+        } catch (_) {}
+        throw new Error(message);
+      }
+
+      const blob = await res.blob();
+      processedImageURL = URL.createObjectURL(blob);
+
+      previewArea.innerHTML = `<img src="${processedImageURL}" alt="Processed">`;
+      downloadBtn.href = processedImageURL;
+      downloadBtn.style.display = "inline-block";
+    } catch (err) {
+      alert("Error: " + err.message);
+    } finally {
+      removeBtn.textContent = originalText;
+      removeBtn.disabled = false;
+    }
   });
 }
 
