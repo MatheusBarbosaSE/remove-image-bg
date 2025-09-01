@@ -11,22 +11,49 @@ const API_URL = "http://127.0.0.1:8000/api/remove-background/";
 let uploadedFile = null;
 let processedImageURL = null;
 
+// Helpers
+function setPreview(src, altText = "Preview") {
+  if (!previewArea) return;
+  const img = new Image();
+  img.onload = () => {
+    previewArea.classList.add("filled");
+    previewArea.style.aspectRatio = `${img.naturalWidth} / ${img.naturalHeight}`;
+    previewArea.innerHTML = "";
+    img.alt = altText;
+    img.style.width = "100%";
+    img.style.height = "100%";
+    img.style.objectFit = "contain";
+    previewArea.appendChild(img);
+  };
+  img.src = src;
+}
+
+function handleSelectedFile(file) {
+  if (!file) return;
+  uploadedFile = file;
+  if (removeBtn) removeBtn.disabled = false;
+  if (downloadBtn) downloadBtn.style.display = "none";
+
+  const reader = new FileReader();
+  reader.onload = (e) => setPreview(e.target.result, "Preview");
+  reader.readAsDataURL(file);
+}
+
+function resetPreview(
+  message = 'Drag & drop an image here or click "Upload Image"'
+) {
+  if (!previewArea) return;
+  previewArea.classList.remove("filled");
+  previewArea.style.aspectRatio = "";
+  previewArea.innerHTML = `<p>${message}</p>`;
+}
+
 // Events
-// File input preview
+// File input → preview
 if (imageInput && previewArea && removeBtn && downloadBtn) {
   imageInput.addEventListener("change", () => {
     const file = imageInput.files && imageInput.files[0];
-    if (!file) return;
-
-    uploadedFile = file;
-    removeBtn.disabled = false;
-    downloadBtn.style.display = "none";
-
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      previewArea.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-    };
-    reader.readAsDataURL(file);
+    handleSelectedFile(file);
   });
 
   // Fetch API → process image
@@ -54,7 +81,7 @@ if (imageInput && previewArea && removeBtn && downloadBtn) {
       const blob = await res.blob();
       processedImageURL = URL.createObjectURL(blob);
 
-      previewArea.innerHTML = `<img src="${processedImageURL}" alt="Processed">`;
+      setPreview(processedImageURL, "Processed");
       downloadBtn.href = processedImageURL;
       downloadBtn.style.display = "inline-block";
     } catch (err) {
@@ -87,17 +114,7 @@ if (dropArea && previewArea && removeBtn && downloadBtn) {
   dropArea.addEventListener("drop", (e) => {
     const file =
       e.dataTransfer && e.dataTransfer.files && e.dataTransfer.files[0];
-    if (!file) return;
-
-    uploadedFile = file;
-    removeBtn.disabled = false;
-    downloadBtn.style.display = "none";
-
-    const reader = new FileReader();
-    reader.onload = (ev) => {
-      previewArea.innerHTML = `<img src="${ev.target.result}" alt="Preview">`;
-    };
-    reader.readAsDataURL(file);
+    handleSelectedFile(file);
   });
 }
 
