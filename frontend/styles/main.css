@@ -109,6 +109,26 @@ body {
   border-radius: 8px;
 }
 
+.preview-area.filled {
+  position: relative;
+  width: min(480px, 90vw);
+  height: auto;
+  aspect-ratio: auto;
+  padding: 0;
+  background: repeating-conic-gradient(
+      rgba(204, 204, 204, 0.3) 0% 25%,
+      rgba(255, 255, 255, 0.3) 0% 50%
+    )
+    50% / 25px 25px;
+}
+.preview-area.filled img {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
 .how-it-works {
   background-color: var(--brand);
   color: var(--bg-white);
