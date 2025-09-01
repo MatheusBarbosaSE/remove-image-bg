@@ -3,6 +3,8 @@ const previewArea = document.getElementById("previewArea");
 const removeBtn = document.getElementById("removeBtn");
 const downloadBtn = document.getElementById("downloadBtn");
 const dropArea = document.getElementById("dropArea");
+const menuToggle = document.getElementById("menuToggle");
+const nav = document.querySelector(".navbar nav");
 
 const API_URL = "http://127.0.0.1:8000/api/remove-background/";
 
@@ -96,5 +98,12 @@ if (dropArea && previewArea && removeBtn && downloadBtn) {
       previewArea.innerHTML = `<img src="${ev.target.result}" alt="Preview">`;
     };
     reader.readAsDataURL(file);
+  });
+}
+
+// Responsive navbar toggle
+if (menuToggle && nav) {
+  menuToggle.addEventListener("click", () => {
+    nav.classList.toggle("active");
   });
 }
