@@ -266,3 +266,31 @@ body {
   max-width: 700px;
   margin: 0 auto;
 }
+
+.benefits {
+  padding: 4rem 2rem;
+  text-align: center;
+  background: var(--bg-page);
+}
+.benefits h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--text-dark);
+}
+.benefits-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+}
+.benefit {
+  max-width: 250px;
+  background: var(--bg-white);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-card);
+  transition: transform 0.3s;
+}
+.benefit:hover {
+  transform: translateY(-5px);
+}
