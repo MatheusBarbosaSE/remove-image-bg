@@ -21,73 +21,76 @@
       </nav>
     </header>
 
-    <section class="hero">
-      <div class="hero-content">
-        <h1>Remove Backgrounds Instantly</h1>
-        <p>Upload your image and get a transparent background in seconds.</p>
-        <div id="dropArea" class="drop-area">
-          <label class="upload-btn" id="uploadLabel">
-            Upload Image
-            <input type="file" id="imageInput" hidden accept="image/*" />
-          </label>
-          <div class="preview-area" id="previewArea">
-            <p>Drag & drop an image here or click "Upload Image"</p>
+    <main class="page">
+      <section class="hero">
+        <div class="hero-content">
+          <h1>Remove Backgrounds Instantly</h1>
+          <p>Upload your image and get a transparent background in seconds.</p>
+          <div id="dropArea" class="drop-area">
+            <label class="upload-btn" id="uploadLabel">
+              Upload Image
+              <input type="file" id="imageInput" hidden accept="image/*" />
+            </label>
+            <div class="preview-area" id="previewArea">
+              <p>Drag & drop an image here or click "Upload Image"</p>
+            </div>
+            <div class="action-buttons">
+              <button id="removeBtn" disabled>Remove Background</button>
+              <a id="downloadBtn" style="display: none" download="result.png"
+                >Download PNG</a
+              >
+            </div>
           </div>
-          <div class="action-buttons">
-            <button id="removeBtn" disabled>Remove Background</button>
-            <a id="downloadBtn" style="display: none" download="result.png"
-              >Download PNG</a
-            >
+        </div>
+      </section>
+
+      <section class="how-it-works">
+        <h2>How Does It Work?</h2>
+        <div class="steps">
+          <div class="step">
+            <h3>1. Upload Your Image</h3>
+            <p>Select or drag & drop your image into the upload area.</p>
+          </div>
+          <div class="step">
+            <h3>2. AI Removes Background</h3>
+            <p>
+              Our AI automatically detects the subject and removes the
+              background.
+            </p>
+          </div>
+          <div class="step">
+            <h3>3. Download Your New Image</h3>
+            <p>Get your new image with a transparent background instantly.</p>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="how-it-works">
-      <h2>How Does It Work?</h2>
-      <div class="steps">
-        <div class="step">
-          <h3>1. Upload Your Image</h3>
-          <p>Select or drag & drop your image into the upload area.</p>
+      <section class="showcase">
+        <div class="showcase-block">
+          <img
+            src="assets/portrait_compare.jpg"
+            alt="Portrait Before/After"
+            class="showcase-img"
+          />
+          <h3>Remove backgrounds automatically and quickly</h3>
+          <p>Perfect for portraits, profile pictures, and creative projects.</p>
         </div>
-        <div class="step">
-          <h3>2. AI Removes Background</h3>
-          <p>
-            Our AI automatically detects the subject and removes the background.
-          </p>
+        <div class="showcase-block">
+          <img
+            src="assets/product_compare.jpg"
+            alt="Product Before/After"
+            class="showcase-img"
+          />
+          <h3>Remove image and product backgrounds easily</h3>
+          <p>Ideal for e-commerce, marketing, and product photos.</p>
         </div>
-        <div class="step">
-          <h3>3. Download Your New Image</h3>
-          <p>Get your new image with a transparent background instantly.</p>
-        </div>
-      </div>
-    </section>
+      </section>
 
-    <section class="showcase">
-      <div class="showcase-block">
-        <img
-          src="assets/portrait_compare.jpg"
-          alt="Portrait Before/After"
-          class="showcase-img"
-        />
-        <h3>Remove backgrounds automatically and quickly</h3>
-        <p>Perfect for portraits, profile pictures, and creative projects.</p>
-      </div>
-      <div class="showcase-block">
-        <img
-          src="assets/product_compare.jpg"
-          alt="Product Before/After"
-          class="showcase-img"
-        />
-        <h3>Remove image and product backgrounds easily</h3>
-        <p>Ideal for e-commerce, marketing, and product photos.</p>
-      </div>
-    </section>
-
-    <section class="cta">
-      <h2>Start Removing Backgrounds for Free</h2>
-      <p>Powered by our open-source API.</p>
-    </section>
+      <section class="cta">
+        <h2>Start Removing Backgrounds for Free</h2>
+        <p>Powered by our open-source API.</p>
+      </section>
+    </main>
 
     <script src="js/script.js"></script>
   </body>
