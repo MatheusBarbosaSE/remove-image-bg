@@ -9,14 +9,19 @@
   <body>
     <header class="navbar">
       <div class="logo">RemoveImageBG</div>
-      <div class="menu-toggle" id="menuToggle">
+      <div
+        class="menu-toggle"
+        id="menuToggle"
+        role="button"
+        aria-label="Toggle navigation"
+      >
         <span></span>
         <span></span>
         <span></span>
       </div>
       <nav>
         <a href="index.html">Home</a>
-        <a href="api.html" class="active">API</a>
+        <a href="api.html" class="active" aria-current="page">API</a>
         <a href="use-api.html">Use the API</a>
       </nav>
     </header>
@@ -25,7 +30,7 @@
       <section class="api-hero">
         <h1>Our Background Removal API</h1>
         <p>
-          RemoveBGImage provides a fast and simple API to remove image
+          RemoveImageBG provides a fast and simple API to remove image
           backgrounds using AI. The API processes images in-memory and returns a
           transparent PNG without saving any files.
         </p>
@@ -73,6 +78,6 @@
       </section>
     </main>
 
-    <script src="js/script.js"></script>
+    <script src="js/script.js" defer></script>
   </body>
 </html>
