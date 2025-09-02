@@ -9,7 +9,12 @@
   <body>
     <header class="navbar">
       <div class="logo">RemoveImageBG</div>
-      <div class="menu-toggle" id="menuToggle">
+      <div
+        class="menu-toggle"
+        id="menuToggle"
+        role="button"
+        aria-label="Toggle navigation"
+      >
         <span></span>
         <span></span>
         <span></span>
@@ -17,7 +22,9 @@
       <nav>
         <a href="index.html">Home</a>
         <a href="api.html">API</a>
-        <a href="use-api.html" class="active">Use the API</a>
+        <a href="use-api.html" class="active" aria-current="page"
+          >Use the API</a
+        >
       </nav>
     </header>
 
@@ -28,7 +35,7 @@
           Easily integrate AI-powered background removal into your applications,
           websites, or workflows. Get high-quality results in seconds.
         </p>
-        <a href="..." target="_blank" class="cta-btn">
+        <a href="..." target="_blank" rel="noopener noreferrer" class="cta-btn">
           Access the Open-Source Project
         </a>
       </section>
@@ -63,10 +70,12 @@
         <p>
           Clone the project, run it locally, or deploy it to your own server.
         </p>
-        <a href="..." target="_blank" class="cta-btn"> View on GitHub </a>
+        <a href="..." target="_blank" rel="noopener noreferrer" class="cta-btn"
+          >View on GitHub</a
+        >
       </section>
     </main>
 
-    <script src="js/script.js"></script>
+    <script src="js/script.js" defer></script>
   </body>
 </html>
