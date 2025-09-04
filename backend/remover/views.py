@@ -3,10 +3,15 @@ from rest_framework.response import Response
 from rest_framework import status
 from rest_framework.parsers import MultiPartParser, FormParser
 from django.http import HttpResponse
+
 from .serializers import ImageUploadSerializer
 from rembg import remove
 from PIL import Image, UnidentifiedImageError
 import io
+
+# Swagger / OpenAPI annotations
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 
 class RemoveBackgroundView(GenericAPIView):
@@ -30,6 +35,32 @@ class RemoveBackgroundView(GenericAPIView):
     # Ensure the endpoint accepts multipart form data for file uploads
     parser_classes = (MultiPartParser, FormParser)
 
+    @swagger_auto_schema(
+        operation_description=(
+            "Upload an image and receive a PNG with the background removed. "
+            "The response body is binary PNG data."
+        ),
+        consumes=["multipart/form-data"],
+        produces=["image/png"],
+        manual_parameters=[
+            openapi.Parameter(
+                name="image",
+                in_=openapi.IN_FORM,
+                type=openapi.TYPE_FILE,
+                required=True,
+                description="Image file to process",
+            )
+        ],
+        responses={
+            200: openapi.Response(
+                description="PNG image (binary)",
+                schema=openapi.Schema(type="string", format="binary"),
+            ),
+            400: "Bad Request",
+            500: "Server Error",
+        },
+        tags=["remove-background"],
+    )
     def post(self, request, *args, **kwargs):
         # Validate incoming request using serializer
         serializer = self.get_serializer(data=request.data)
@@ -59,7 +90,6 @@ class RemoveBackgroundView(GenericAPIView):
                     {"error": "The uploaded file is not a valid image."},
                     status=status.HTTP_400_BAD_REQUEST,
                 )
-
             except Exception as e:
                 # Unexpected errors during processing
                 return Response(
