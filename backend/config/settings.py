@@ -80,7 +80,6 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
-# Django defaults
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # DRF (explicit parsers for file uploads)
@@ -103,8 +102,13 @@ CORS_ALLOWED_ORIGINS = [
         default="http://127.0.0.1:5500,http://localhost:5500",
     ).split(",")
 ]
+# Expose header so the frontend can read the filename on download
+CORS_EXPOSE_HEADERS = ["Content-Disposition"]
 
 # Upload limits (5 MB default)
 MAX_UPLOAD_SIZE = int(config("MAX_UPLOAD_SIZE", default=str(5 * 1024 * 1024)))
 DATA_UPLOAD_MAX_MEMORY_SIZE = MAX_UPLOAD_SIZE
 FILE_UPLOAD_MAX_MEMORY_SIZE = MAX_UPLOAD_SIZE
+
+# Pillow safety cap (default ~50 MP). Can be overridden in .env
+PIL_MAX_IMAGE_PIXELS = config("PIL_MAX_IMAGE_PIXELS", cast=int, default=50_000_000)
